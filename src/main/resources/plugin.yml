@@ -1,0 +1,9 @@
+name: randomEvents
+version: '1.0-SNAPSHOT'
+main: me.kaidenbell.randomEvents.RandomEvents
+api-version: '1.21'
+commands:
+  startevent:
+    description: Manually starts a random event.
+    usage: /startevent [block|mob]
+    permission: randomEvents.startevent

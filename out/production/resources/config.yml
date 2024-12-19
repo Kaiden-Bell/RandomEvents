@@ -1,0 +1,7 @@
+events:
+  random_interval_minutes: 30
+  default_duration_seconds: 60
+  block_challenge:
+    block_type: STONE
+  mob_challenge:
+    mob_type: ZOMBIE

@@ -2,6 +2,24 @@ events:
   random_interval_minutes: 30
   default_duration_seconds: 60
   block_challenge:
-    block_type: STONE
+    allowed_blocks:
+      - STONE
+      - DIRT
+      - SAND
+      - DEEPSLATE
+      - OAK_LOG
+      - SPRUCE_LOG
+      - BIRCH_LOG
+      - COAL_ORE
+      - COPPER_ORE
+      - IRON_ORE
+      - LAPIS_ORE
+      - REDSTONE_ORE
+      - DIAMOND_ORE
   mob_challenge:
-    mob_type: ZOMBIE
+    allowed_mobs:
+      - ZOMBIE
+      - SKELETON
+      - CREEPER
+      - SPIDER
+      - ENDERMAN

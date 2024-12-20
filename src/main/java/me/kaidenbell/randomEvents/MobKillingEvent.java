@@ -1,6 +1,5 @@
 package me.kaidenbell.randomEvents;
 
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -8,10 +7,10 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.event.entity.EntityDeathEvent;
-import org.bukkit.scoreboard.Scoreboard;
 
 import java.util.List;
-import java.util.Objects;
+import java.util.Arrays;
+import java.util.Random;
 
 public class MobKillingEvent implements BaseEvent, Listener {
     private JavaPlugin plugin;
@@ -32,7 +31,16 @@ public class MobKillingEvent implements BaseEvent, Listener {
         this.rewardManager = rewardManager;
         this.scoreTracker = new ScoreTracker();
 
-        this.targetMobType = config.getMobTypeForEvent();
+        List<String> mobNames = config.getConfig().getStringList("events.mob_challenge.allowed_mobs");
+
+
+        List<EntityType> allowedMobs = mobNames.stream()
+                .map(EntityType::valueOf)
+                .toList();
+
+        Random rand = new Random();
+
+        this.targetMobType = allowedMobs.get(rand.nextInt(allowedMobs.size()));
         this.durationInTicks = config.getEventDurationTicks();
     }
 
@@ -40,16 +48,19 @@ public class MobKillingEvent implements BaseEvent, Listener {
     public void start() {
         running = true;
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
+
+        plugin.getServer().broadcastMessage("§cMob Killing Event §astarted! §cKill as many " + "§6" + targetMobType.name().toLowerCase().replace("_", " ") + "s §aas you can!");
+
         // Schedule event end
         taskID = plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, this::end, durationInTicks);
 
         this.scoreboard = new EventScoreboard("Mob Killing Event");
-        this.scoreboard.showToALlPlayers();
+        this.scoreboard.showToAllPlayers();
 
         updateTaskID = plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, () -> {
             List<PlayerScore> topScores = scoreTracker.getTopScores(3);
             scoreboard.setScores(topScores);
-        }, 0L, 100L); // 0 delay, 100 ticks
+        }, 0L, 100L); // 0 delay, 20 ticks / 1 second
     }
 
     @Override

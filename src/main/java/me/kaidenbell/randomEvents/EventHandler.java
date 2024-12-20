@@ -18,7 +18,6 @@ public class EventHandler {
         if (currentEvent != null && currentEvent.isRunning()) {
             currentEvent.end();
         }
-        plugin.getServer().broadcastMessage("§aThe Event has started!");
         currentEvent = event;
         currentEvent.start();
     }
@@ -38,8 +37,8 @@ public class EventHandler {
                 BaseEvent newEvent = Math.random() > 0.5 ?
                         new BlockBreakingEvent(plugin, config, rewardManager) :
                         new MobKillingEvent(plugin, config, rewardManager);
-                long delayTicks = 60 * 20; // New Event starts in 60 seconds
-                long warningTicks = delayTicks - (10 * 20);
+                long delayTicks = 60 * 20; // New Event starts in 60 seconds (60s * 20 ticks)
+                long warningTicks = delayTicks - (10 * 20); // Run warning ticks 10 seconds before an event starts
 
                 plugin.getServer().getScheduler().runTaskLater(plugin, () -> {
                     startEvent(newEvent);
@@ -53,7 +52,6 @@ public class EventHandler {
             }
         }, interval, interval);
     }
-
 
     public JavaPlugin getPlugin() {
         return plugin;

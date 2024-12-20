@@ -38,7 +38,7 @@ public class EventScoreboard {
         }
     }
 
-    public void showToALlPlayers() {
+    public void showToAllPlayers() {
         for (Player player : Bukkit.getOnlinePlayers()) {
             player.setScoreboard(scoreboard);
         }

@@ -4,6 +4,8 @@ import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.EntityType;
 
+import java.util.List;
+
 public class ConfigurationManager {
     private FileConfiguration config;
 
@@ -29,5 +31,9 @@ public class ConfigurationManager {
     public EntityType getMobTypeForEvent() {
         String mobName = config.getString("events.mob_challenge.mob_type", "ZOMBIE");
         return EntityType.valueOf(mobName.toUpperCase());
+    }
+
+    public FileConfiguration getConfig() {
+        return config;
     }
 }

@@ -19,6 +19,7 @@ public final class RandomEvents extends JavaPlugin {
 
         eventHandler.scheduleRandomEvent();
         getCommand("startevent").setExecutor(new StartEventCommand(eventHandler));
+        getCommand("stopevent").setExecutor(new StopEventCommand(eventHandler));
     }
 
     @Override

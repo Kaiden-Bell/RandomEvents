@@ -66,4 +66,8 @@ public class EventHandler {
     public RewardManager getRewardManager() {
         return rewardManager;
     }
+
+    public BaseEvent getCurrentEvent() {
+        return currentEvent;
+    }
 }

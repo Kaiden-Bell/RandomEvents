@@ -50,7 +50,7 @@ public class BlockBreakingEvent implements BaseEvent, Listener {
         running = true;
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
 
-        plugin.getServer().broadcastMessage("§aBlock Breaking Event started! Break as many " + targetBlock.name().toLowerCase().replace("_", " ") + "blocks as you can!");
+        plugin.getServer().broadcastMessage("§aBlock Breaking Event started! Break as many §6" + targetBlock.name().toUpperCase().replace("_", " ") + " blocks as you can!");
 
         // Schedule event end
         taskID = plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, this::end, durationInTicks);
@@ -61,7 +61,7 @@ public class BlockBreakingEvent implements BaseEvent, Listener {
         updateTaskID = plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, () -> {
             List<PlayerScore> topScores = scoreTracker.getTopScores(3);
             scoreboard.setScores(topScores);
-        }, 0L, 100L); // 0 delay, 20 ticks / 1 Second
+        }, 0L, 20L); // 0 delay, 20 ticks / 1 Second
     }
 
     @Override

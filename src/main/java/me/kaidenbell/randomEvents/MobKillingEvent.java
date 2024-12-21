@@ -60,7 +60,7 @@ public class MobKillingEvent implements BaseEvent, Listener {
         updateTaskID = plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, () -> {
             List<PlayerScore> topScores = scoreTracker.getTopScores(3);
             scoreboard.setScores(topScores);
-        }, 0L, 100L); // 0 delay, 20 ticks / 1 second
+        }, 0L, 20L); // 0 delay, 20 ticks / 1 second
     }
 
     @Override
